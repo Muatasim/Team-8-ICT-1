@@ -14,7 +14,7 @@ namespace Grocery_Demo
         protected void Page_Load(object sender, EventArgs e)
         {
             string CS;
-            CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+            CS = "data source=DESKTOP-3RIA5FI; database = Grocery_Demo; integrated security=SSPI";
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("ViewProfile", con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -67,7 +67,7 @@ namespace Grocery_Demo
         protected void Edit_Click(object sender, EventArgs e)
         {
             string CS;
-            CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+            CS = "data source=DESKTOP-3RIA5FI; database = Grocery_Demo; integrated security=SSPI";
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("UpdateProfile", con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
