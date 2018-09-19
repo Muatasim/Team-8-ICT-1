@@ -134,7 +134,7 @@ namespace Grocery_Demo
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             string ProductName = row.Cells[2].Text;
 
-            if (Price > 00.00m)
+            if (Price > 00.09m)
             {
                 string CS;
                 CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";

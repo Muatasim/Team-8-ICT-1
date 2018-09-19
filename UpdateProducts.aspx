@@ -5,7 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-<link href="CSS/HomePage.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="CSS/Skeleton.css" rel="stylesheet" />
 <link href="CSS/DropDown.css" rel="stylesheet" />
 <link href="CSS/searchproducts.css" rel="stylesheet" />
 <link href="CSS/searchtext.css" rel="stylesheet" />
@@ -20,7 +21,7 @@
          <div style="text-align:right">
          <div style="text-align:left" class="dropdown">
          <button class="dropbtn"><asp:Label ID="Label2" runat="server" ></asp:Label></button>
-         <div style="text-align:left" class="dropdown-content">
+         <div style="text-align:left" class="dropdown-content a">
          <a href="ViewProfile.aspx">View Profile</a>
          <a href="UpdateProfile.aspx">Edit Profile</a>
          <a href="HomePage.aspx">Logout</a>
@@ -33,9 +34,13 @@
          &nbsp;<strong>Branch</strong> 
          </div>
 
+        <div id="site-wrapper">
+        <header>
+        <div class="content-wrap">
          <p class="logo">
             <asp:Image ID="Image1" runat="server" />
             <img alt="" class="auto-style1" src="Grocery Image/logo.jpg" /></p>
+        <br />
 
          <p class="menu">
             <asp:Button ID="Button1" runat="server" PostBackUrl="~/AdminHomepage.aspx" CausesValidation="False" Text="Home" Width="127px" Font-Bold="True" />
@@ -46,8 +51,11 @@
             <asp:Button ID="Button6" runat="server" PostBackUrl="~/ViewBranch.aspx" CausesValidation="False" Text="Branches" Width="127px" Font-Bold="True" />
             <asp:Button ID="Button7" runat="server" PostBackUrl="~/ViewAdmin.aspx" CausesValidation="False" Text="Administrators" Width="127px" Font-Bold="True" />
         </p>
+        </div>
+        </header>
 
-       </div>
+        <main>
+        <div class="content-wrap">
         <div class="searchtext">
         <strong>Search by Product Name</strong> 
         </div>
@@ -110,24 +118,36 @@
           <asp:TextBox ID ="TextBox3" runat="server" Width="80px" DataField="Product_Price" Text='<%#string.Format("{0:0.00}",Eval("Product_Price"))%>'/>
           <asp:Label ID="Label4" Text="AUD" runat="server"></asp:Label>
           <asp:Button ID ="Button11" runat="server" OnClick="Price_Update_Click" ValidationGroup="UpdatePrice" CommandArgument="Button11" CommandName="Update"  Text="Update" />
-          <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="TextBox3" ErrorMessage="Must be greater than 0.00" Operator="GreaterThan" Type="Currency" ValueToCompare="0.00" />
-          <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Numbers with decimals only" ControlToValidate="TextBox3" ValidationExpression="^\d{1,9}\.\d{1,2}$"></asp:RegularExpressionValidator>          
+          <asp:CompareValidator ID="CompareValidator1" runat="server" ControlToValidate="TextBox3" ErrorMessage="Must be greater than 0.09 .. Cannot accept integer or character or more than 2 numbers after decimal" Operator="GreaterThan" Type="Currency" ValueToCompare="0.09" Display="Dynamic" />
+          <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator1"  runat="server" ErrorMessage="Numbers with only 2 digits after decimal" ControlToValidate="TextBox3" ValidationExpression="^\d{1,9}\.\d{1,2}$"></asp:RegularExpressionValidator>--%>               
           </ItemTemplate>
           </asp:TemplateField>
          <asp:TemplateField HeaderText="Quantity" >
          <ItemTemplate>
           <asp:TextBox ID ="TextBox4" runat="server" Width="60px" DataField="Product_Quantity" Text='<%#Eval("Product_Quantity")%>' />
-          <asp:Button ID ="Button12" runat="server" OnClick="Quantity_Update_Click" CommandArgument="Button12" CommandName="Update"  Text="Update" />
-          <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="TextBox4" ErrorMessage="Must be greater than 0" Operator="GreaterThan" Type="Integer" ValueToCompare="0" />
-          <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Numbers only" ControlToValidate="TextBox4" ValidationExpression="^[0-9]*$"></asp:RegularExpressionValidator>      
+          <asp:Button ID ="Button12" runat="server" OnClick="Quantity_Update_Click" ValidationGroup="UpdateQuantity" CommandArgument="Button12" CommandName="Update"  Text="Update" />
+          <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="TextBox4" ErrorMessage="Must be greater than 0 .. Cannot accept decimal or character" Operator="GreaterThan" Type="Integer" ValueToCompare="0" Display="Dynamic"  />
+          <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Numbers only but no decimals" ControlToValidate="TextBox4" ValidationExpression="^[0-9]*$"></asp:RegularExpressionValidator>--%> 
+          <asp:Label ID="Label5" runat="server"></asp:Label>     
           </ItemTemplate>
           </asp:TemplateField>
          <asp:BoundField DataField="Grocery_Branch_Name" HeaderText="Branch" />
      
          </Columns>
          </asp:GridView>
+         
+         </div>
+         </main>
 
-        <%--<asp:BoundField DataField="Product_Price" HeaderText="Price" DataFormatString="{0} AUD" />--%>
+         <br />
+        
+        <footer>
+        <div class="content-wrap">
+        <p>&copy; Mix & Match Groceries. All Rights Reserved</p>
+        </div>
+        </footer>
+
+        </div>
             
     </form>
 </body>
