@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Grocery_Demo
 {
@@ -18,8 +19,7 @@ namespace Grocery_Demo
    
         private void DisplayProducts()
         {
-            string CS;
-            CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("ViewProducts", con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -31,8 +31,7 @@ namespace Grocery_Demo
 
         protected void Search_Product(object sender, EventArgs e)
         {
-            string CS;
-            CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("SearchProduct", con);
             cmd.Parameters.AddWithValue("@ProductName", TextBox1.Text + "%");
@@ -47,15 +46,14 @@ namespace Grocery_Demo
             read.Read();
             if (read.HasRows == false)
             {
-                Label1.Text = "Couldn't find your product";
+                Label1.Text = " Couldn't find your product";
                 con.Close();
             }
         }
 
         protected void View_Option1(object sender, EventArgs e)
         {
-            string CS;
-            CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("ViewOption1", con);
             cmd.Parameters.AddWithValue("@ProductCategoryName", DropDownList1.SelectedValue);
@@ -73,8 +71,7 @@ namespace Grocery_Demo
 
         protected void View_Option2(object sender, EventArgs e)
         {
-            string CS;
-            CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("ViewOption2", con);
             cmd.Parameters.AddWithValue("@GroceryBranchName", DropDownList2.SelectedValue);
@@ -92,8 +89,7 @@ namespace Grocery_Demo
 
         protected void View_Option3(object sender, EventArgs e)
         {
-            string CS;
-            CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("ViewOption3", con);
             cmd.Parameters.AddWithValue("@ProductCategoryName", DropDownList3.SelectedValue);

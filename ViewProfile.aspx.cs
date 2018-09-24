@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Grocery_Demo
 {
@@ -12,8 +13,7 @@ namespace Grocery_Demo
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string CS;
-            CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("ViewProfile", con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -37,11 +37,11 @@ namespace Grocery_Demo
             read.Read();
 
 
-            Label3.Text = (string)read["Administrator_Name"];
-            Label4.Text = (string)read["Administrator_Username"];
-            Label5.Text = (string)read["Administrator_Password"];
-            Label6.Text = (string)read["Administrator_Phone_No"];
-            Label7.Text = (string)read["Administrator_Email"];
+            Label4.Text = (string)read["Administrator_Name"];
+            Label6.Text = (string)read["Administrator_Username"];
+            Label8.Text = (string)read["Administrator_Password"];
+            Label10.Text = (string)read["Administrator_Phone_No"];
+            Label12.Text = (string)read["Administrator_Email"];
 
             con.Close();
          

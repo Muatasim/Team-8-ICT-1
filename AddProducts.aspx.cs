@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.IO;
+using System.Configuration;
 
 namespace Grocery_Demo
 {
@@ -18,8 +19,7 @@ namespace Grocery_Demo
                 string username = Session["UsernameAdmin"].ToString();
                 string password = Session["PasswordAdmin"].ToString();
                 string branch = Session["BranchAdmin"].ToString();
-                string CS;
-                CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("AdminValidation", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -59,8 +59,7 @@ namespace Grocery_Demo
                 BinaryReader binaryreader = new BinaryReader(stream);
                 byte[] bytes = binaryreader.ReadBytes((int)stream.Length);
                 string branch = Session["BranchAdmin"].ToString();
-                string CS;
-                CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("AddProducts", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;

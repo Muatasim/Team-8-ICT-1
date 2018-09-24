@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Threading;
+using System.Configuration;
 
 namespace Grocery_Demo
 {
@@ -18,8 +19,7 @@ namespace Grocery_Demo
 
         protected void Register(object sender, EventArgs e)
         {
-            string CS;
-            CS = "data source=DESKTOP-3RIA5FI; database = Grocery_Demo; integrated security=SSPI";
+            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("MatchTokenNumber", con);
             cmd.Parameters.AddWithValue("@TokenNo", TextBox6.Text);
@@ -34,9 +34,8 @@ namespace Grocery_Demo
             }
             
             else
-            { 
-            string CS1;
-            CS1 = "data source=DESKTOP-3RIA5FI; database = Grocery_Demo; integrated security=SSPI";
+            {
+            string CS1 = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
             SqlConnection con1 = new SqlConnection(CS1);
             SqlCommand cmd1 = new SqlCommand("AdminRegistration", con1);
             cmd1.CommandType = System.Data.CommandType.StoredProcedure;
@@ -47,19 +46,17 @@ namespace Grocery_Demo
             cmd1.Parameters.AddWithValue("@AdministratorPhoneNo", TextBox4.Text);
             cmd1.Parameters.AddWithValue("@AdministratorEmail", TextBox5.Text);
             cmd1.Parameters.AddWithValue("@GroceryBranchName", DropDownList1.SelectedValue);
-            cmd1.ExecuteNonQuery();
-            MessageBox("You are registered successfully");
+            cmd1.ExecuteNonQuery();            
             Session["UsernameAdmin"] = TextBox2.Text;
             Session["PasswordAdmin"] = TextBox3.Text;
             Session["BranchAdmin"] = DropDownList1.SelectedValue;
-            Response.Redirect("AdminHomepage.aspx");
+           
             con1.Close();
+            
+                Response.Write("<script>alert('You are registered successfully')</script>");
+                Server.Transfer("AdminHomepage.aspx");
             }
         }
-
-        public void MessageBox(string message)
-        {
-            Page.ClientScript.RegisterStartupScript(Page.GetType(), "MessageBox", "<script language='javascript'>alert('" + message + "')</script>");
-        }
+                
     }
 }

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Grocery_Demo
 {
@@ -18,8 +19,7 @@ namespace Grocery_Demo
                 string username = Session["UsernameAdmin"].ToString();
                 string password = Session["PasswordAdmin"].ToString();
                 string branch = Session["BranchAdmin"].ToString();
-                string CS;
-                CS = "data source=DESKTOP-3RIA5FI; database = Grocery_Demo; integrated security=SSPI";
+                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("AdminValidation", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -49,8 +49,7 @@ namespace Grocery_Demo
 
         private void DisplayAdmin()
         {
-            string CS;
-            CS = "data source=DESKTOP-3RIA5FI; database = Grocery_Demo; integrated security=SSPI";
+            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("DisplayAdmin", con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;

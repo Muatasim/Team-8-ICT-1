@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace Grocery_Demo
 {
-    public partial class ViewBranch : System.Web.UI.Page
+    public partial class AdminHomepage : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -43,19 +43,8 @@ namespace Grocery_Demo
 
             Label1.Text = Session["BranchAdmin"].ToString();
             Label2.Text = Session["UsernameAdmin"].ToString();
-            DisplayBranch();
-        }
-
-        private void DisplayBranch()
-        {
-            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
-            SqlConnection con = new SqlConnection(CS);
-            SqlCommand cmd = new SqlCommand("DisplayBranch", con);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            con.Open();
-            GridView1.DataSource = cmd.ExecuteReader();
-            GridView1.DataBind();
-            con.Close();
         }
     }
-}
+
+       
+    }

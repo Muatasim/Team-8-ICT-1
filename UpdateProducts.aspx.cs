@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace Grocery_Demo
 {
@@ -17,8 +18,7 @@ namespace Grocery_Demo
                 string username = Session["UsernameAdmin"].ToString();
                 string password = Session["PasswordAdmin"].ToString();
                 string branch = Session["BranchAdmin"].ToString();
-                string CS;
-                CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("AdminValidation", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -56,8 +56,7 @@ namespace Grocery_Demo
          if (Session["BranchAdmin"] != null)
             {
                 string branch = Session["BranchAdmin"].ToString();
-                string CS;
-                CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("AdminViewProductsOnBranch", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -75,8 +74,7 @@ namespace Grocery_Demo
             if (Session["BranchAdmin"] != null)
             {
                 string branch = Session["BranchAdmin"].ToString();
-                string CS;
-                CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("AdminSearchProductsOnBranch", con);
                 cmd.Parameters.AddWithValue("@ProductName", TextBox1.Text + "%");
@@ -103,8 +101,7 @@ namespace Grocery_Demo
             if (Session["BranchAdmin"] != null)
             {
                 string branch = Session["BranchAdmin"].ToString();
-                string CS;
-                CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("AdminViewCategoriesOnBranch", con);
                 cmd.Parameters.AddWithValue("@ProductCategoryName", DropDownList1.SelectedValue);
@@ -136,8 +133,7 @@ namespace Grocery_Demo
 
             if (Price > 00.09m)
             {
-                string CS;
-                CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("UpdateProductPrice", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -163,10 +159,9 @@ namespace Grocery_Demo
             GridViewRow row = (GridViewRow)btn.NamingContainer;
             string ProductNo = row.Cells[0].Text;
 
-            if (Quantity > 0)
+            if (Quantity == 0 || Quantity > 0)
             {
-                string CS;
-                CS = "data source=LAPTOP-ODS96MIK\\MSSQL2014; database = Grocery_Demo; integrated security=SSPI";
+                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("UpdateProductQuantity", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -183,11 +178,7 @@ namespace Grocery_Demo
 
         protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            //if (e.Row.RowType == DataControlRowType.DataRow)
-            //{
-            //    e.Row.Attributes["onmouseover"] = "this.style.backgroundColor='green';";
-            //    e.Row.Attributes["onmouseout"] = "this.style.backgroundColor='white';";
-            //}
+            
         }
         protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
         {
