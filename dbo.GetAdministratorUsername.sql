@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE GetAdministratorUsername
-@AdministratorNo INT,
+@AdministratorNo INTEGER,
 @AdministratorUsername VARCHAR(30) OUTPUT
 AS
 BEGIN
