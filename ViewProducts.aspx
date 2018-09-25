@@ -5,7 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
-    <link href="CSS/HomePage.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="CSS/Skeleton.css" rel="stylesheet" />
+    <link href="CSS/headertext.css" rel="stylesheet" />
     <link href="CSS/searchproducts.css" rel="stylesheet" />
     <link href="CSS/viewproducts1.css" rel="stylesheet" />
     <link href="CSS/viewproducts2.css" rel="stylesheet" />
@@ -14,30 +16,41 @@
     <link href="CSS/viewtext1.css" rel="stylesheet" />
     <link href="CSS/viewtext2.css" rel="stylesheet" />
     <link href="CSS/viewtext3.css" rel="stylesheet" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
     <form id="form1" runat="server">
-      <div class ="home" style="text-align:right;">
-    
-       <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/SignIn.aspx">Sign In</asp:HyperLink>
-        &nbsp;<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/SignUp.aspx">Sign Up</asp:HyperLink>&nbsp;
-
+      <div style="text-align:right;"> 
+       <h4><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/SignIn.aspx">Sign In</asp:HyperLink> 
+        &nbsp;&nbsp;<asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/SignUp.aspx">Sign Up</asp:HyperLink>&nbsp;</h4>
+        &nbsp;
         </div>
-        <p class="logo">
+
+        <div id="site-wrapper">
+        
+        <header>
+        <div class="content-wrap">
+        <div class="logo">
             <asp:Image ID="Image1" runat="server" />
-            <img alt="" class="auto-style1" src="Grocery Image/logo.jpg" /></p>
-                
-           <p class="menu">
-            <asp:Button ID="Button1" runat="server" PostBackUrl="~/Homepage.aspx" Text="Home" Width="127px" Font-Bold="True" />
-            <asp:Button ID="Button2" runat="server" PostBackUrl="~/Promotion.aspx" Text="Promotions" Width="127px" Font-Bold="True" />
-            <asp:Button ID="Button3" runat="server" PostBackUrl="~/ViewProducts.aspx" Text="View Products" Width="127px" Font-Bold="True" /> 
-            <asp:Button ID="Button4" runat="server" PostBackUrl="~/AboutUs.aspx" Text="About Us" Width="127px" Font-Bold="True" />
-            <asp:Button ID="Button5" runat="server" PostBackUrl="~/ContactUs.aspx" Text="Contact Us" Width="127px" Font-Bold="True" />              
-        </p>
-
-<div class="searchtext">
-        <strong>Search by Product Name</strong> 
+            <img src="Grocery Image/logo.jpg" style="height:105px; width:800px; margin-left:350px" /></div>
+           <br />   
+           <div class="menu">
+            <asp:Button ID="Button1" Class="btn-success" runat="server" PostBackUrl="~/Homepage.aspx" Text="Home" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+            <asp:Button ID="Button2" Class="btn-success" runat="server" PostBackUrl="~/Promotion.aspx" Text="Promotions" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+            <asp:Button ID="Button3" Class="btn-success" runat="server" PostBackUrl="~/ViewProducts.aspx" Text="Products" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" /> 
+            <asp:Button ID="Button4" Class="btn-success" runat="server" PostBackUrl="~/AboutUs.aspx" Text="About Us" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+            <asp:Button ID="Button5" Class="btn-success" runat="server" PostBackUrl="~/ContactUs.aspx" Text="Contact Us" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />              
         </div>
+        <br />
+      
+        </div>
+        </header>
+
+        <main>
+        <div class="content-wrap">
+        <h4 class="searchtext">
+        <strong>Search by Product Name</strong> 
+        </h4>
 
          <div class="searchproducts">
         <asp:Table ID="Table1" runat="server" align="center" >
@@ -56,9 +69,9 @@
             
         <br />
      
-         <div class="viewtext1">
+         <h4 class="viewtext1">
              <strong>View Option 1: View Product on Category Selection</strong>
-          </div>
+          </h4>
             
             <div class="viewproducts1">
             <asp:Table ID="Table2" runat="server" align="center" >
@@ -82,9 +95,9 @@
            
         <br />
 
-            <div class="viewtext2">
+            <h4 class="viewtext2">
             <strong>View Option 2: View Product on Branch Selection</strong>
-            </div>
+            </h4>
 
             <div class="viewproducts2">
             <asp:Table ID="Table3" runat="server" align="center" >
@@ -106,9 +119,9 @@
         
         <br />
         
-             <div class="viewtext3">
+             <h4 class="viewtext3">
              <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; View Option 3: View Product on Branch and Category Selection</strong>
-             </div>
+             </h4>
 
             <div class="viewproducts3">
             <asp:Table ID="Table4" runat="server" align="center" >
@@ -136,9 +149,10 @@
             <br />
             <asp:Button ID="Button9" runat="server" ValidationGroup="ViewByCategoryBranch" OnClick="View_Option3" Text="View Product" />
             </div>
-            
-        <br/>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center">
+        <br/>    
+        <br/>  
+        <div style="margin-left:330px;">      
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" HeaderStyle-BackColor="#00a400" HeaderStyle-ForeColor="White">
         <Columns>
          <asp:TemplateField HeaderText="Image">
          <ItemTemplate>
@@ -152,7 +166,21 @@
          <asp:BoundField DataField="Product_Quantity" HeaderText="Quantity" />
          <asp:BoundField DataField="Grocery_Branch_Name" HeaderText="Branch" />
          </Columns>
-        </asp:GridView>
+        </asp:GridView>    
+        </div>                
+
+        </div>
+        </main>
+
+        <br />
+        
+        <footer>
+        <div class="content-wrap">
+        <p>&copy; Mix & Match Groceries. All Rights Reserved</p>
+        </div>
+        </footer>
+
+       </div>
 
     </form>
 </body>

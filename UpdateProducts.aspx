@@ -8,11 +8,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="CSS/Skeleton.css" rel="stylesheet" />
 <link href="CSS/DropDown.css" rel="stylesheet" />
+<link href="CSS/headingtext.css" rel="stylesheet" />
 <link href="CSS/searchproducts.css" rel="stylesheet" />
 <link href="CSS/searchtext.css" rel="stylesheet" />
 <link href="CSS/viewproducts.css" rel="stylesheet" />
 <link href="CSS/viewtext.css" rel="stylesheet" />
 <link href="CSS/displaybranch.css" rel="stylesheet" />
+<link href="Content/bootstrap.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -24,41 +26,47 @@
          <div style="text-align:left" class="dropdown-content a">
          <a href="ViewProfile.aspx">View Profile</a>
          <a href="UpdateProfile.aspx">Edit Profile</a>
-         <a href="HomePage.aspx">Logout</a>
+         <a href="Homepage.aspx">Logout</a>
          </div>
          </div>
          </div>
 
-         <div class="displaybranch">
+        <h3 class="displaybranch">
          <asp:Label ID="Label1" runat="server" Font-Bold="true"></asp:Label>
          &nbsp;<strong>Branch</strong> 
-         </div>
+         </h3>
 
         <div id="site-wrapper">
+        
         <header>
         <div class="content-wrap">
-         <p class="logo">
+         <div class="logo">
             <asp:Image ID="Image1" runat="server" />
-            <img alt="" class="auto-style1" src="Grocery Image/logo.jpg" /></p>
+            <img src="Grocery Image/logo.jpg" style="height:105px; width:800px; margin-left:350px" /></div>
         <br />
 
-         <p class="menu">
-            <asp:Button ID="Button1" runat="server" PostBackUrl="~/AdminHomepage.aspx" CausesValidation="False" Text="Home" Width="127px" Font-Bold="True" />
-            <asp:Button ID="Button2" runat="server" PostBackUrl="~/AddProducts.aspx" CausesValidation="False" Text="Add Products" Width="127px" Font-Bold="True" />
-            <asp:Button ID="Button3" runat="server" PostBackUrl="~/AdminViewProducts.aspx" CausesValidation="False" Text="View Products" Width="127px" Font-Bold="True" />
-            <asp:Button ID="Button4" runat="server" PostBackUrl="~/UpdateProducts.aspx" CausesValidation="False" Text="Update Products" Width="127px" Font-Bold="True" />
-            <asp:Button ID="Button5" runat="server" PostBackUrl="~/AddPromotion.aspx" CausesValidation="False" Text="Add Promotion" Width="127px" Font-Bold="True" />
-            <asp:Button ID="Button6" runat="server" PostBackUrl="~/ViewBranch.aspx" CausesValidation="False" Text="Branches" Width="127px" Font-Bold="True" />
-            <asp:Button ID="Button7" runat="server" PostBackUrl="~/ViewAdmin.aspx" CausesValidation="False" Text="Administrators" Width="127px" Font-Bold="True" />
-        </p>
+        <div class="menu">
+        <asp:Button ID="Button1" Class="btn-success" runat="server" PostBackUrl="~/AdminHomepage.aspx" CausesValidation="False" Text="Home" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+        <asp:Button ID="Button2" Class="btn-success" runat="server" PostBackUrl="~/AddProducts.aspx" CausesValidation="False" Text="Add Products" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+        <asp:Button ID="Button3" Class="btn-success" runat="server" PostBackUrl="~/AdminViewProducts.aspx" CausesValidation="False" Text="Products" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+        <asp:Button ID="Button4" Class="btn-success" runat="server" PostBackUrl="~/UpdateProducts.aspx" CausesValidation="False" Text="Update Products" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+        <asp:Button ID="Button5" Class="btn-success" runat="server" PostBackUrl="~/AddPromotion.aspx" CausesValidation="False" Text="Add Promotion" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+        <asp:Button ID="Button6" Class="btn-success" runat="server" PostBackUrl="~/ViewBranch.aspx" CausesValidation="False" Text="Branches" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+        <asp:Button ID="Button7" Class="btn-success" runat="server" PostBackUrl="~/ViewAdmin.aspx" CausesValidation="False" Text="Administrators" Width="142px" Height="40px" Font-Bold="True" style="background-color:#00a400" />
+        </div>
         </div>
         </header>
-
+        <br />
+        <br />
+        <h3 class="headingtext">
+        <strong>Update a product price or quantity</strong>
+        </h3>
+        
         <main>
         <div class="content-wrap">
-        <div class="searchtext">
+        <h4 class="searchtext">
         <strong>Search by Product Name</strong> 
-        </div>
+        </h4>
 
          <div class="searchproducts">
         <asp:Table ID="Table1" runat="server" align="center" >
@@ -77,9 +85,9 @@
             
         <br />
    
-        <div class="viewtext">
+        <h4 class="viewtext">
              <strong>View by Category: View Product on Category Selection</strong>
-        </div>
+        </h4>
 
         <div class="viewproducts">
         <asp:Table ID="Table2" runat="server" align="center" >
@@ -101,7 +109,8 @@
         <asp:Button ID="Button9" runat="server"  OnClick="View_Product" ValidationGroup="ViewByCategory" Text="View Product" />
         </div>
         <br/>
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowDataBound="GridView1_RowDataBound">
+        <div style="margin-left:200px;">   
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" HorizontalAlign="Center" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowDataBound="GridView1_RowDataBound" HeaderStyle-BackColor="#00a400" HeaderStyle-ForeColor="White">
         <Columns>
          <asp:BoundField DataField="Product_No" HeaderText="Product No" />
          <asp:TemplateField HeaderText="Image">
@@ -126,8 +135,8 @@
          <ItemTemplate>
           <asp:TextBox ID ="TextBox4" runat="server" Width="60px" DataField="Product_Quantity" Text='<%#Eval("Product_Quantity")%>' />
           <asp:Button ID ="Button12" runat="server" OnClick="Quantity_Update_Click" ValidationGroup="UpdateQuantity" CommandArgument="Button12" CommandName="Update"  Text="Update" />
-          <asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="TextBox4" ErrorMessage="Must be greater than 0 .. Cannot accept decimal or character" Operator="GreaterThan" Type="Integer" ValueToCompare="0" Display="Dynamic"  />
-          <%--<asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Numbers only but no decimals" ControlToValidate="TextBox4" ValidationExpression="^[0-9]*$"></asp:RegularExpressionValidator>--%> 
+          <%--<asp:CompareValidator ID="CompareValidator2" runat="server" ControlToValidate="TextBox4" ErrorMessage="Must be greater than 0 .. Cannot accept decimal or character" Operator="GreaterThan" Type="Integer" ValueToCompare="0" Display="Dynamic"  />--%>
+          <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Cannot accept decimal or character" ControlToValidate="TextBox4" ValidationExpression="^[0-9]*$" Display="Dynamic"></asp:RegularExpressionValidator> 
           <asp:Label ID="Label5" runat="server"></asp:Label>     
           </ItemTemplate>
           </asp:TemplateField>
@@ -135,7 +144,7 @@
      
          </Columns>
          </asp:GridView>
-         
+         </div>
          </div>
          </main>
 
