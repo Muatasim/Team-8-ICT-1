@@ -5,20 +5,32 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
-using System.Configuration;
 
 namespace Grocery_Demo
 {
     public partial class AdminHomepage : System.Web.UI.Page
     {
+        string username;
+        string UserName
+        {
+            set
+            {
+                username = Session["UsernameAdmin"].ToString();
+            }
+            get
+            {
+                return username;
+            }
+        }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["UsernameAdmin"] != null && Session["PasswordAdmin"] != null && Session["BranchAdmin"] != null)
             {
-                string username = Session["UsernameAdmin"].ToString();
                 string password = Session["PasswordAdmin"].ToString();
                 string branch = Session["BranchAdmin"].ToString();
-                string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
+                string CS;
+                CS = "Data Source=DESKTOP-UEA1TMT;Initial Catalog=Grocery_Demo;Integrated Security=True";
                 SqlConnection con = new SqlConnection(CS);
                 SqlCommand cmd = new SqlCommand("AdminValidation", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
