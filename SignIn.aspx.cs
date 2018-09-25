@@ -6,7 +6,6 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Data;
-using System.Configuration;
 
 namespace Grocery_Demo
 {
@@ -20,7 +19,8 @@ namespace Grocery_Demo
         protected void Log_In(object sender, EventArgs e)
         {
 
-            string CS = ConfigurationManager.ConnectionStrings["Grocery_DemoConnectionString"].ConnectionString;
+            string CS;
+            CS = "Data Source=DESKTOP-UEA1TMT;Initial Catalog=Grocery_Demo;Integrated Security=True";
             SqlConnection con = new SqlConnection(CS);
             SqlCommand cmd = new SqlCommand("Login", con);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -39,7 +39,8 @@ namespace Grocery_Demo
                 con.Close();
 
                 SqlConnection con1 = new SqlConnection(CS);
-                SqlCommand cmd1 = new SqlCommand("GetBranchName", con1);              
+                SqlCommand cmd1 = new SqlCommand("GetBranchName", con1);
+               // string returnValue = string.Empty;
                 con1.Open();
                 cmd1.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd1.Parameters.AddWithValue("@AdministratorUsername", TextBox1.Text);
