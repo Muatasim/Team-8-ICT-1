@@ -1,0 +1,5 @@
+﻿CREATE PROCEDURE DisplayBranch
+AS
+BEGIN
+SELECT * FROM Grocery_Branch
+END
