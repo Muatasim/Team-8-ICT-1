@@ -51,9 +51,13 @@ namespace Grocery_Demo
             string filename = Path.GetFileName(postedfile.FileName);
             string fileextension = Path.GetExtension(filename);
             int filesize = postedfile.ContentLength;
+            int Quantity;
+            TextBox box3 = (TextBox)FindControl("TextBox3");
+            bool qty = int.TryParse(box3.Text, out Quantity);
 
-            if (fileextension.ToLower() == ".jpg" || fileextension.ToLower() == ".jpeg" || fileextension.ToLower() == ".bmp" ||
-                fileextension.ToLower() == ".gif" || fileextension.ToLower() == ".png")
+
+            if ((fileextension.ToLower() == ".jpg" || fileextension.ToLower() == ".jpeg" || fileextension.ToLower() == ".bmp" ||
+                fileextension.ToLower() == ".gif" || fileextension.ToLower() == ".png") && (Quantity > 0))
             {
                 Stream stream = postedfile.InputStream;
                 BinaryReader binaryreader = new BinaryReader(stream);
@@ -74,15 +78,16 @@ namespace Grocery_Demo
                 cmd.Parameters.AddWithValue("@BarcodeNo", TextBox4.Text);
                 cmd.ExecuteNonQuery();
                 con.Close();
-                MessageBox("New Product has been added");
+                Response.Write("<script>alert('New Product has been added')</script>");
+                Server.Transfer("AddProducts.aspx");
+            }
 
+            else if (Quantity == 0)
+            {
+                Label8.Text = " Add at least one quantity";
             }
         }
 
-        public void MessageBox(string message)
-        {
-            Page.ClientScript.RegisterStartupScript(Page.GetType(), "MessageBox", "<script language='javascript'>alert('" + message + "')</script>");
-        }
     }
 
 }
