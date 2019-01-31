@@ -8,7 +8,7 @@ using System.Web.Helpers;
 
 namespace Grocery_Demo
 {
-    public partial class Homepage : System.Web.UI.Page
+    public partial class ContactUs : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
